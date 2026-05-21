@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="shortcut icon" href="assets/images/cao_logo.png" type="image/x-icon">
+  
+  <title>Encontre Meu Amigo | Sistema de Animais Perdidos</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">🐾</div>
+        <div>
+          <h1>Encontre Meu Amigo</h1><span>Sistema comunitário de animais perdidos</span>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" onclick="showScreen('home',this)">Início</button>
+        <button class="nav-btn" onclick="showScreen('cadastro',this)">Cadastrar</button>
+        <button class="nav-btn" onclick="showScreen('lista',this)">Animais</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">💚 Plataforma solidária e gratuita</span>
+          <h2>Ajude cachorros perdidos a voltarem para casa.</h2>
+          <p>Uma interface rápida, clara e segura para cadastrar animais encontrados ou perdidos, adicionar foto,
+            localização aproximada e contato via WhatsApp.</p>
+          <div class="actions">
+            <button class="btn primary" onclick="showScreen('cadastro')">Cadastrar animal</button>
+            <button class="btn outline" onclick="showScreen('lista')">Consultar lista</button>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="panel stat"><strong id="totalHome">0</strong><span>animais cadastrados na demonstração</span>
+          </div>
+          <div class="panel info-list">
+            <h3>Como funciona</h3>
+            <div class="info-item"><span class="check">1</span>
+              <p>Cadastre o animal com foto e informações principais.</p>
+            </div>
+            <div class="info-item"><span class="check">2</span>
+              <p>A localização e o contato ajudam o dono a confirmar o animal.</p>
+            </div>
+            <div class="info-item"><span class="check">3</span>
+              <p>O botão do WhatsApp facilita o contato imediato pelo celular.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="cadastro" class="screen">
+      <div class="section-title">
+        <div>
+          <h2>Cadastro do animal</h2>
+          <p>Preencha as informações com clareza para facilitar a identificação.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <form id="animalForm">
+          <div class="form-section" style="margin-top:0;padding-top:0;border-top:none">
+            <h3>Dados do cachorro</h3>
+            <div class="form-grid">
+              <div class="field"><label>Nome do cachorro</label><input id="nomeAnimal"
+                  placeholder="Ex: Rex, Mel, nome não informado"></div>
+              <div class="field"><label>Raça</label><input id="raca" placeholder="Ex: Vira-lata, Poodle, Labrador">
+              </div>
+              <div class="field"><label>Cor predominante</label><input id="cor"
+                  placeholder="Ex: Caramelo, preto, branco"></div>
+              <div class="field"><label>Porte</label><select id="porte">
+                  <option>Pequeno</option>
+                  <option>Médio</option>
+                  <option>Grande</option>
+                </select></div>
+              <div class="field"><label>Sexo</label><select id="sexo">
+                  <option>Não identificado</option>
+                  <option>Macho</option>
+                  <option>Fêmea</option>
+                </select></div>
+              <div class="field"><label>Status</label><select id="status">
+                  <option value="encontrado">Encontrado</option>
+                  <option value="perdido">Perdido</option>
+                </select></div>
+            </div>
+          </div>
+          <div class="form-section">
+            <h3>Localização</h3>
+            <div class="form-grid">
+              <div class="field full-row"><label>Local de referência</label><input id="local"
+                  placeholder="Ex: Próximo à praça central, mercado, escola..."></div>
+              <div class="field"><label>Bairro</label><input id="bairro" placeholder="Ex: Centro"></div>
+              <div class="field"><label>Cidade</label><input id="cidade" placeholder="Ex: Três Lagoas"></div>
+              <div class="field"><label>Data</label><input type="date" id="dataEncontrado"></div>
+              <div class="field"><label>Localização interativa</label><button type="button" class="btn secondary full"
+                  onclick="fakeLocation()">📍 Marcar localização atual</button><small id="locText">Nenhuma localização
+                  marcada</small></div>
+            </div>
+          </div>
+          <div class="form-section">
+            <h3>Contato responsável</h3>
+            <div class="form-grid">
+              <div class="field"><label>Nome da pessoa</label><input id="nomePessoa" placeholder="Seu nome"></div>
+              <div class="field"><label>WhatsApp</label><input id="telefone" placeholder="67999999999"></div>
+              <div class="field full-row"><label>Observações</label><textarea id="obs"
+                  placeholder="Ex: estava com coleira azul, parecia assustado, foi visto perto de uma farmácia..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="form-section">
+            <h3>Foto do animal</h3>
+            <div class="field"><label>Enviar foto</label><input type="file" accept="image/*" capture="environment"
+                id="foto"><small>No Firebase, essa imagem será enviada para o Storage e a URL será salva no
+                Firestore.</small><img id="preview" class="preview" style="display:none"></div>
+          </div>
+          <button class="btn primary full" type="submit" style="margin-top:24px">Salvar cadastro de
+            demonstração</button>
+        </form>
+      </div>
+    </section>
+    <section id="lista" class="screen">
+      <div class="section-title">
+        <div>
+          <h2>Animais cadastrados</h2>
+          <p>Busque por nome, cor, bairro, cidade ou porte.</p>
+        </div><button class="btn primary" onclick="showScreen('cadastro')">Novo cadastro</button>
+      </div>
+      <div class="filters"><input id="search" placeholder="Buscar animal..."><select id="statusFilter">
+          <option value="">Todos os status</option>
+          <option value="encontrado">Encontrados</option>
+          <option value="perdido">Perdidos</option>
+        </select><select id="porteFilter">
+          <option value="">Todos os portes</option>
+          <option>Pequeno</option>
+          <option>Médio</option>
+          <option>Grande</option>
+        </select></div>
+      <div class="grid" id="cards"></div>
+    </section>
+  </main>
+  <div class="modal" id="modal">
+    <div class="modal-box"><button class="close" onclick="closeModal()">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  
+  <script src="js/main.js"></script>
+</body>
+
+</html>
