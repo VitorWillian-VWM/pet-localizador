@@ -16,3 +16,33 @@ function onlyNumbers(v) { return String(v || '').replace(/\D/g, '') }
 function formatDate(d) { if (!d) return '-'; const [y, m, day] = d.split('-'); return `${day}/${m}/${y}` }
 function updateTotal() { document.getElementById('totalHome').textContent = animals.length }
 document.addEventListener('input', e => { if (['search', 'statusFilter', 'porteFilter'].includes(e.target.id)) renderCards() }); renderCards(); updateTotal();
+
+function abrirModalPix() {
+  document.getElementById("pixModal").classList.add("active");
+}
+
+function fecharModalPix() {
+  document.getElementById("pixModal").classList.remove("active");
+}
+
+function salvarComentarioPix() {
+  const comentario = document.getElementById("comentarioPix").value.trim();
+  const lista = document.getElementById("listaComentarios");
+
+  if (!comentario) {
+    alert("Digite um comentário antes de salvar.");
+    return;
+  }
+
+  const vazio = lista.querySelector(".empty-comment");
+  if (vazio) vazio.remove();
+
+  const item = document.createElement("div");
+  item.className = "comment-item";
+  item.innerHTML = `<strong>Apoiador:</strong> ${comentario}`;
+
+  lista.prepend(item);
+
+  document.getElementById("comentarioPix").value = "";
+  fecharModalPix();
+}
