@@ -138,27 +138,64 @@
         <form id="animalForm">
           <div class="form-section" style="margin-top:0;padding-top:0;border-top:none">
             <h3>Dados do cachorro</h3>
+
             <div class="form-grid">
-              <div class="field"><label>Nome do cachorro</label><input id="nomeAnimal"
-                  placeholder="Ex: Rex, Mel, nome não informado"></div>
-              <div class="field"><label>Raça</label><input id="raca" placeholder="Ex: Vira-lata, Poodle, Labrador">
+
+              <div class="field">
+                <label>Quem está cadastrando?</label>
+                <select id="tipoCadastro">
+                  <option value="encontrador">Encontrei este cachorro</option>
+                  <option value="dono">Sou o dono e estou procurando</option>
+                </select>
               </div>
-              <div class="field"><label>Cor predominante</label><input id="cor"
-                  placeholder="Ex: Caramelo, preto, branco"></div>
-              <div class="field"><label>Porte</label><select id="porte">
+
+              <div class="field status-field">
+                <label>Situação do animal</label>
+                <select id="status">
+                  <option value="encontrado">Animal encontrado</option>
+                  <option value="perdido">Animal perdido</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Nome do cachorro (se souber)</label>
+                <input
+                  id="nomeAnimal"
+                  placeholder="Se souber o nome, informe aqui. Caso não saiba, deixe em branco">
+              </div>
+
+              <div class="field">
+                <label>Raça (se souber)</label>
+                <input
+                  id="raca"
+                  placeholder="Ex: Vira-lata, Poodle, Labrador">
+              </div>
+
+              <div class="field">
+                <label>Cor predominante</label>
+                <input
+                  id="cor"
+                  placeholder="Ex: Caramelo, preto, branco">
+              </div>
+
+              <div class="field">
+                <label>Porte</label>
+                <select id="porte">
                   <option>Pequeno</option>
                   <option>Médio</option>
                   <option>Grande</option>
-                </select></div>
-              <div class="field"><label>Sexo</label><select id="sexo">
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Sexo</label>
+                <select id="sexo">
                   <option>Não identificado</option>
                   <option>Macho</option>
                   <option>Fêmea</option>
-                </select></div>
-              <div class="field"><label>Status</label><select id="status">
-                  <option value="encontrado">Encontrado</option>
-                  <option value="perdido">Perdido</option>
-                </select></div>
+                </select>
+              </div>
+
             </div>
           </div>
           <div class="form-section">
@@ -186,9 +223,21 @@
           </div>
           <div class="form-section">
             <h3>Foto do animal</h3>
-            <div class="field"><label>Enviar foto</label><input type="file" accept="image/*" capture="environment"
-                id="foto"><small>No Firebase, essa imagem será enviada para o Storage e a URL será salva no
-                Firestore.</small><img id="preview" class="preview" style="display:none"></div>
+            <div class="field">
+              <label>Enviar foto</label>
+              <div class="upload-box">
+                <input type="file" accept="image/*" capture="environment" id="foto" class="upload-input">
+
+                <label for="foto" class="upload-label">
+                  📷 Escolher foto do animal
+                </label>
+
+                <span id="fileName" class="file-name">
+                  Nenhuma foto selecionada
+                </span>
+              </div>
+              <small>No Firebase, essa imagem será enviada para o Storage e a URL será salva no Firestore.</small>
+              <img id="preview" class="preview" style="display:none"></div>
           </div>
           <button class="btn primary full" type="submit" style="margin-top:24px">Salvar cadastro de
             demonstração</button>
@@ -199,20 +248,50 @@
       <div class="section-title">
         <div>
           <h2>Animais cadastrados</h2>
-          <p>Busque por nome, cor, bairro, cidade ou porte.</p>
-        </div><button class="btn primary" onclick="showScreen('cadastro')">Novo cadastro</button>
+          <p>
+            Busque animais encontrados ou perdidos, filtre por porte e encontre mais rápido.
+          </p>
+        </div>
+
+        <button class="btn primary" onclick="showScreen('cadastro')">
+          Novo cadastro
+        </button>
       </div>
-      <div class="filters"><input id="search" placeholder="Buscar animal..."><select id="statusFilter">
-          <option value="">Todos os status</option>
-          <option value="encontrado">Encontrados</option>
-          <option value="perdido">Perdidos</option>
-        </select><select id="porteFilter">
+
+      <!-- Abas de separação -->
+      <div class="status-tabs">
+        <button class="tab-btn active" onclick="setStatusTab('', this)">
+          Todos
+        </button>
+
+        <button class="tab-btn" onclick="setStatusTab('encontrado', this)">
+          Animais encontrados
+        </button>
+
+        <button class="tab-btn" onclick="setStatusTab('perdido', this)">
+          Animais perdidos
+        </button>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filters">
+        <input
+          id="search"
+          placeholder="Buscar por nome, raça, cor, bairro ou cidade...">
+
+        <select id="porteFilter">
           <option value="">Todos os portes</option>
           <option>Pequeno</option>
           <option>Médio</option>
           <option>Grande</option>
-        </select></div>
+        </select>
+      </div>
+
+      <!-- Cards -->
       <div class="grid" id="cards"></div>
+
+      <!-- Paginação -->
+      <div class="pagination" id="pagination"></div>
     </section>
   </main>
   <div class="modal" id="modal">
@@ -251,6 +330,23 @@
       <textarea id="comentarioPix" placeholder="Ex: Espero que esse projeto ajude muitos animais..."></textarea>
       <button class="donation-button" onclick="salvarComentarioPix()">
         Salvar comentário
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de mensagem -->
+  <div class="custom-modal" id="customModal">
+    <div class="custom-modal-box">
+      <div class="custom-modal-icon" id="customModalIcon">✓</div>
+
+      <h3 id="customModalTitle">Mensagem</h3>
+
+      <p id="customModalText">
+        Texto da mensagem.
+      </p>
+
+      <button class="btn primary full" onclick="fecharMensagemModal()">
+        Fechar
       </button>
     </div>
   </div>
