@@ -18,31 +18,57 @@ function updateTotal() { document.getElementById('totalHome').textContent = anim
 document.addEventListener('input', e => { if (['search', 'statusFilter', 'porteFilter'].includes(e.target.id)) renderCards() }); renderCards(); updateTotal();
 
 function abrirModalPix() {
-  document.getElementById("pixModal").classList.add("active");
+    document.getElementById("pixModal").classList.add("active");
 }
 
 function fecharModalPix() {
-  document.getElementById("pixModal").classList.remove("active");
+    document.getElementById("pixModal").classList.remove("active");
 }
 
 function salvarComentarioPix() {
-  const comentario = document.getElementById("comentarioPix").value.trim();
-  const lista = document.getElementById("listaComentarios");
+    const comentario = document.getElementById("comentarioPix").value.trim();
+    const lista = document.getElementById("listaComentarios");
 
-  if (!comentario) {
-    alert("Digite um comentário antes de salvar.");
-    return;
-  }
+    if (!comentario) {
+        alert("Digite um comentário antes de salvar.");
+        return;
+    }
 
-  const vazio = lista.querySelector(".empty-comment");
-  if (vazio) vazio.remove();
+    const vazio = lista.querySelector(".empty-comment");
+    if (vazio) vazio.remove();
 
-  const item = document.createElement("div");
-  item.className = "comment-item";
-  item.innerHTML = `<strong>Apoiador:</strong> ${comentario}`;
+    const item = document.createElement("div");
+    item.className = "comment-item";
+    const estrelasTexto = "⭐".repeat(avaliacaoSelecionada || 0);
 
-  lista.prepend(item);
+    item.innerHTML = `
+    <strong>Apoiador:</strong> ${estrelasTexto}<br>
+    ${comentario}
+    `;
 
-  document.getElementById("comentarioPix").value = "";
-  fecharModalPix();
+    lista.prepend(item);
+
+    document.getElementById("comentarioPix").value = "";
+    fecharModalPix();
+}
+
+let avaliacaoSelecionada = 0;
+
+function setRating(valor) {
+    avaliacaoSelecionada = valor;
+
+    const estrelas = document.querySelectorAll("#starRating span");
+    estrelas.forEach((estrela, index) => {
+        estrela.classList.toggle("active", index < valor);
+    });
+
+    const textos = {
+        1: "😕 Pode melhorar",
+        2: "🙂 Interessante",
+        3: "😊 Boa ideia",
+        4: "😍 Excelente projeto",
+        5: "🚀 Projeto incrível!"
+    };
+
+    document.getElementById("ratingText").textContent = textos[valor];
 }

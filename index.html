@@ -233,9 +233,22 @@
 
       <img src="assets/images/qr-code.png" alt="QR Code PIX" class="pix-qrcode">
 
+      <div class="rating-section">
+        <label>Você gostou da ideia deste projeto?</label>
+
+        <div class="star-rating" id="starRating">
+          <span onclick="setRating(1)">★</span>
+          <span onclick="setRating(2)">★</span>
+          <span onclick="setRating(3)">★</span>
+          <span onclick="setRating(4)">★</span>
+          <span onclick="setRating(5)">★</span>
+        </div>
+
+        <small id="ratingText">Clique para avaliar</small>
+      </div>
+
       <label for="comentarioPix">Deixe um comentário de apoio</label>
       <textarea id="comentarioPix" placeholder="Ex: Espero que esse projeto ajude muitos animais..."></textarea>
-
       <button class="donation-button" onclick="salvarComentarioPix()">
         Salvar comentário
       </button>
