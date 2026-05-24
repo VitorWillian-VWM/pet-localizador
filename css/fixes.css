@@ -1,0 +1,43 @@
+/* =====================================================
+   CORREÇÕES PONTUAIS — adicionar ao final do style.css
+===================================================== */
+
+/* ── 1. Search bar nas páginas sem hero (Perdidos, Encontrados) ──
+   Remove o margin negativo e adiciona espaçamento correto        */
+.search-bar.hidden-hero {
+  margin: 32px auto 0;   /* positivo: desce da header, não sobe */
+  max-width: 1100px;
+}
+
+/* ── 2. Contato: centralizar igual às outras seções ── */
+.contact-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+/* ── 3. Espaço vazio: body cresce para preencher a tela,
+   footer sempre cola no fim do conteúdo real               ── */
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Todas as seções diretas do body crescem normalmente */
+body > header  { flex-shrink: 0; }
+body > footer  { flex-shrink: 0; margin-top: auto; }
+
+/* Área de conteúdo principal ocupa o espaço disponível */
+body > .search-bar,
+body > .section,
+body > .features,
+body > .how-it-works-section,
+body > .tips-section,
+body > .contact-section {
+  flex-shrink: 0;
+}

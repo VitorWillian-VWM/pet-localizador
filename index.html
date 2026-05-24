@@ -2,355 +2,580 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Plataforma comunitária para encontrar animais perdidos e divulgar animais encontrados em Três Lagoas - MS">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="shortcut icon" href="assets/images/cao_logo.png" type="image/x-icon">
 
-  <title>Encontre Meu Amigo | Sistema de Animais Perdidos</title>
+  <title>Encontre Meu Amigo – Três Lagoas - MS</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/fixes.css">
+
+  <!--FONTES GOOGLE-->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
 </head>
 
 <body>
-  <header class="app-header">
-    <div class="header-inner">
-      <div class="brand">
-        <div class="logo">🐾</div>
-        <div>
-          <h1>Encontre Meu Amigo</h1><span>Sistema comunitário de animais perdidos</span>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <a class="logo-area" href="#">
+        <div class="logo-img" id="logo-container" title="Logo Cachorro e Gato"></div>
+        <div class="logo-text">
+          <strong>Encontre Meu Amigo</strong>
+          <span>📍 Três Lagoas - MS</span>
         </div>
-      </div>
-      <nav>
-        <button class="nav-btn active" onclick="showScreen('home',this)">Início</button>
-        <button class="nav-btn" onclick="showScreen('cadastro',this)">Cadastrar</button>
-        <button class="nav-btn" onclick="showScreen('lista',this)">Animais</button>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <!-- Seção inicial -->
-    <section id="home" class="screen active">
-      <div class="hero">
-        <div class="hero-card">
-          <span class="eyebrow">💚 Plataforma solidária e gratuita</span>
-          <h2>Ajude cachorros perdidos a voltarem para casa.</h2>
-          <p>Uma interface rápida, clara e segura para cadastrar animais encontrados ou perdidos, adicionar foto,
-            localização aproximada e contato via WhatsApp.</p>
-          <div class="actions">
-            <button class="btn primary" onclick="showScreen('cadastro')">Cadastrar animal</button>
-            <button class="btn outline" onclick="showScreen('lista')">Consultar lista</button>
-          </div>
-        </div>
-        <div class="hero-side">
-          <div class="panel stat"><strong id="totalHome">0</strong><span>animais cadastrados na demonstração</span>
-          </div>
-          <div class="panel info-list">
-            <h3>Como funciona</h3>
-            <div class="info-item"><span class="check">1</span>
-              <p>Cadastre o animal com foto e informações principais.</p>
-            </div>
-            <div class="info-item"><span class="check">2</span>
-              <p>A localização e o contato ajudam o dono a confirmar o animal.</p>
-            </div>
-            <div class="info-item"><span class="check">3</span>
-              <p>O botão do WhatsApp facilita o contato imediato pelo celular.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
+      <button class="menu-toggle" type="button" onclick="toggleMobileMenu()">
+        ☰
+      </button>
+      <ul class="nav-links">
+        <li><a href="#" class="active" data-page="home">Início</a></li>
+        <li><a href="#" data-page="lost">Animais Perdidos</a></li>
+        <li><a href="#" data-page="found">Animais Encontrados</a></li>
+        <li><a href="#" data-page="how">Como Funciona</a></li>
+        <li><a href="#" data-page="tips">Dicas</a></li>
+        <li><a href="#" data-page="contact">Contato</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="btn-announce" onclick="openAnimalModal(event)">Anunciar Animal +</a>
+        <div class="account-area">
+          <!-- VISÍVEL QUANDO DESLOGADO -->
+          <button id="loginHeaderBtn" class="header-login-btn" onclick="openLoginModal()">
+            Login
+          </button>
 
-      <!-- Seção de doação -->
-      <section class="donation-section">
-        <div class="donation-card">
-
-          <div class="donation-left">
-            <div class="donation-icon">
-              💚
-            </div>
-
-            <div class="donation-content">
-              <span class="donation-badge">
-                🤝 Juntos por uma causa real
-              </span>
-
-              <h2>Ajude a manter e evoluir este sistema</h2>
-
-              <p>
-                Este projeto é 100% voluntário e independente.
-                Qualquer contribuição nos ajuda a manter o sistema no ar,
-                desenvolver novas funcionalidades e alcançar mais pessoas
-                para reunir animais com seus donos.
-              </p>
-
-              <div class="donation-started">
-                ✅ 💚 Já contribuí! Depositei <strong>R$ 100,00</strong> para iniciarmos este projeto.
-              </div>
-
-              <div class="donation-comments">
-                <h3>Comentários de apoiadores</h3>
-                <div id="listaComentarios">
-                  <p class="empty-comment">Nenhum comentário ainda. Seja o primeiro apoiador!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="donation-right">
-            <h3>Meta inicial para desenvolvimento</h3>
-
-            <div class="goal-value">R$ 2.000,00</div>
-
-            <div class="progress-wrapper">
-              <div class="progress-bar">
-                <div class="progress-fill"></div>
-              </div>
-              <span>5%</span>
-            </div>
-
-            <div class="donation-stats">
-              <span>Arrecadado: <strong>R$ 100,00</strong></span>
-              <span>Falta: <strong>R$ 1.900,00</strong></span>
-            </div>
-
-            <button class="donation-button" onclick="abrirModalPix()">
-              Contribuir com qualquer valor
+          <!-- VISÍVEL QUANDO LOGADO -->
+          <div class="account-menu hidden" id="accountMenuWrapper">
+            <button id="accountBtn" class="nav-avatar" type="button" onclick="toggleAccountMenu()">
+              👤
             </button>
 
-            <small>
-              🛡 Transparência total. Cada contribuição faz a diferença.
-            </small>
+            <div id="accountDropdown" class="account-dropdown">
+              <button type="button" onclick="openProfileModal()">Perfil</button>
+              <button type="button" onclick="openMyAnimalsModal()">Animais Cadastrados</button>
+              <button type="button" onclick="logout()">Logout</button>
+            </div>
           </div>
-
-        </div>
-      </section>
-    </section>
-
-    <section id="cadastro" class="screen">
-      <div class="section-title">
-        <div>
-          <h2>Cadastro do animal</h2>
-          <p>Preencha as informações com clareza para facilitar a identificação.</p>
         </div>
       </div>
-      <div class="panel">
-        <form id="animalForm">
-          <div class="form-section" style="margin-top:0;padding-top:0;border-top:none">
-            <h3>Dados do cachorro</h3>
+    </nav>
+  </header>
 
-            <div class="form-grid">
-
-              <div class="field">
-                <label>Quem está cadastrando?</label>
-                <select id="tipoCadastro">
-                  <option value="encontrador">Encontrei este cachorro</option>
-                  <option value="dono">Sou o dono e estou procurando</option>
-                </select>
-              </div>
-
-              <div class="field status-field">
-                <label>Situação do animal</label>
-                <select id="status">
-                  <option value="encontrado">Animal encontrado</option>
-                  <option value="perdido">Animal perdido</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>Nome do cachorro (se souber)</label>
-                <input
-                  id="nomeAnimal"
-                  placeholder="Se souber o nome, informe aqui. Caso não saiba, deixe em branco">
-              </div>
-
-              <div class="field">
-                <label>Raça (se souber)</label>
-                <input
-                  id="raca"
-                  placeholder="Ex: Vira-lata, Poodle, Labrador">
-              </div>
-
-              <div class="field">
-                <label>Cor predominante</label>
-                <input
-                  id="cor"
-                  placeholder="Ex: Caramelo, preto, branco">
-              </div>
-
-              <div class="field">
-                <label>Porte</label>
-                <select id="porte">
-                  <option>Pequeno</option>
-                  <option>Médio</option>
-                  <option>Grande</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>Sexo</label>
-                <select id="sexo">
-                  <option>Não identificado</option>
-                  <option>Macho</option>
-                  <option>Fêmea</option>
-                </select>
-              </div>
-
+  <!-- HERO -->
+  <section class="hero" id="home-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Ajude a encontrar.<br><em>Ajude a voltar para casa.</em> 🖤</h1>
+        <p>Plataforma comunitária para encontrar animais perdidos e divulgar animais encontrados em <strong>Três Lagoas
+            – MS</strong></p>
+        <!--<div class="hero-btns">
+          <a href="#" class="btn-primary">🐾 Anunciar Animal Perdido</a>
+          <a href="#" class="btn-outline">🐾 Anunciar Animal Encontrado</a>
+        </div>!-->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-icon">🐾</div>
+            <div>
+              <strong>0+</strong>
+              <span>Animais ajudados</span>
             </div>
           </div>
-          <div class="form-section">
-            <h3>Localização</h3>
-            <div class="form-grid">
-              <div class="field full-row"><label>Local de referência</label><input id="local"
-                  placeholder="Ex: Próximo à praça central, mercado, escola..."></div>
-              <div class="field"><label>Bairro</label><input id="bairro" placeholder="Ex: Centro"></div>
-              <div class="field"><label>Cidade</label><input id="cidade" placeholder="Ex: Três Lagoas"></div>
-              <div class="field"><label>Data</label><input type="date" id="dataEncontrado"></div>
-              <div class="field"><label>Localização interativa</label><button type="button" class="btn secondary full"
-                  onclick="fakeLocation()">📍 Marcar localização atual</button><small id="locText">Nenhuma localização
-                  marcada</small></div>
+          <div class="hero-stat">
+            <div class="hero-stat-icon">👥</div>
+            <div>
+              <strong>727+</strong>
+              <span>Pessoas na comunidade</span>
             </div>
           </div>
-          <div class="form-section">
-            <h3>Contato responsável</h3>
-            <div class="form-grid">
-              <div class="field"><label>Nome da pessoa</label><input id="nomePessoa" placeholder="Seu nome"></div>
-              <div class="field"><label>WhatsApp</label><input id="telefone" placeholder="67999999999"></div>
-              <div class="field full-row"><label>Observações</label><textarea id="obs"
-                  placeholder="Ex: estava com coleira azul, parecia assustado, foi visto perto de uma farmácia..."></textarea>
-              </div>
+          <div class="hero-stat">
+            <div class="hero-stat-icon">📍</div>
+            <div>
+              <strong>Três Lagoas - MS</strong>
+              <span>Região atendida</span>
             </div>
           </div>
-          <div class="form-section">
-            <h3>Foto do animal</h3>
-            <div class="field">
-              <label>Enviar foto</label>
-              <div class="upload-box">
-                <input type="file" accept="image/*" capture="environment" id="foto" class="upload-input">
-
-                <label for="foto" class="upload-label">
-                  📷 Escolher foto do animal
-                </label>
-
-                <span id="fileName" class="file-name">
-                  Nenhuma foto selecionada
-                </span>
-              </div>
-              <small>No Firebase, essa imagem será enviada para o Storage e a URL será salva no Firestore.</small>
-              <img id="preview" class="preview" style="display:none"></div>
-          </div>
-          <button class="btn primary full" type="submit" style="margin-top:24px">Salvar cadastro de
-            demonstração</button>
-        </form>
+        </div>
       </div>
-    </section>
-    <section id="lista" class="screen">
-      <div class="section-title">
+      <div class="hero-card">
+        <div class="hc-icon">🐾</div>
+        <h3>Juntos somos a esperança deles.</h3>
+        <p>Cada compartilhamento pode ser o reencontro que eles tanto esperam.</p>
+        <div class="hc-heart">🖤</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BARRA DE BUSCA -->
+  <div class="search-bar" id="search-bar">
+    <div class="search-label">🐾 Encontre um animal</div>
+
+    <div class="search-input-wrap">
+      <span class="si-icon">🔍</span>
+      <input type="text" id="searchText" placeholder="Buscar por nome, raça ou cor...">
+    </div>
+
+    <div class="search-select-wrap" id="tipoFilterWrapper">
+      <label>Tipo</label>
+      <select id="filterTipo">
+        <option value="all">Todos</option>
+        <option value="perdido">Perdido</option>
+        <option value="encontrado">Encontrado</option>
+      </select>
+    </div>
+
+    <div class="search-select-wrap" id="tipoFilterWrapper">
+      <label>Categoria</label>
+      <select id="filterCategoria">
+        <option value="all">Todos</option>
+        <option value="cao">Cão</option>
+        <option value="gato">Gato</option>
+        <option value="outro">Outro</option>
+      </select>
+    </div>
+
+    <div class="search-input-wrap">
+      <input type="text" id="filterBairro" placeholder="Digite o bairro...">
+    </div>
+
+    <button class="btn-search" onclick="applySearchFilters()">🔍 Buscar</button>
+  </div>
+
+  <!-- ANÚNCIOS RECENTES -->
+  <section class="section" id="animals-section">
+    <div class="section-header">
+      <div class="section-header-col">
+        <div class="section-title">Anúncios recentes</div>
+      </div>
+      
+    </div>
+    <div class="cards-grid" id="cards-grid">
+      <!-- Os cards são gerados pelo JS abaixo -->
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner">
+      <div class="feature-item">
+        <div class="feature-icon">✅</div>
         <div>
-          <h2>Animais cadastrados</h2>
+          <h4>Fácil e rápido</h4>
+          <p>Anuncie em poucos minutos e ajude a espalhar.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔍</div>
+        <div>
+          <h4>Busca inteligente</h4>
+          <p>Encontre por filtros e características.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📢</div>
+        <div>
+          <h4>Compartilhe</h4>
+          <p>Compartilhamento fácil com um clique.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🖤</div>
+        <div>
+          <h4>Comunidade unida</h4>
+          <p>Todos juntos por uma causa maior.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="how-it-works-section" id="how-section" style="display: none;">
+    <div class="how-container">
+      <span class="section-kicker">🐾 Guia rápido</span>
+
+      <h2>Como funciona o Encontre Meu Amigo?</h2>
+
+      <p class="how-intro">
+        O site foi criado para facilitar a divulgação de animais perdidos e encontrados
+        em Três Lagoas - MS, deixando tudo mais organizado e fácil de encontrar.
+      </p>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <span>1</span>
+          <h3>Cadastre o animal</h3>
           <p>
-            Busque animais encontrados ou perdidos, filtre por porte e encontre mais rápido.
+            A pessoa preenche um formulário simples informando se o animal foi perdido
+            ou encontrado, colocando bairro, características e contato.
           </p>
         </div>
 
-        <button class="btn primary" onclick="showScreen('cadastro')">
-          Novo cadastro
-        </button>
-      </div>
-
-      <!-- Abas de separação -->
-      <div class="status-tabs">
-        <button class="tab-btn active" onclick="setStatusTab('', this)">
-          Todos
-        </button>
-
-        <button class="tab-btn" onclick="setStatusTab('encontrado', this)">
-          Animais encontrados
-        </button>
-
-        <button class="tab-btn" onclick="setStatusTab('perdido', this)">
-          Animais perdidos
-        </button>
-      </div>
-
-      <!-- Filtros -->
-      <div class="filters">
-        <input
-          id="search"
-          placeholder="Buscar por nome, raça, cor, bairro ou cidade...">
-
-        <select id="porteFilter">
-          <option value="">Todos os portes</option>
-          <option>Pequeno</option>
-          <option>Médio</option>
-          <option>Grande</option>
-        </select>
-      </div>
-
-      <!-- Cards -->
-      <div class="grid" id="cards"></div>
-
-      <!-- Paginação -->
-      <div class="pagination" id="pagination"></div>
-    </section>
-  </main>
-  <div class="modal" id="modal">
-    <div class="modal-box"><button class="close" onclick="closeModal()">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <!-- Modal de doação via PIX -->
-  <div class="pix-modal" id="pixModal">
-    <div class="pix-modal-content">
-      <button class="pix-close" onclick="fecharModalPix()">×</button>
-
-      <h2>Contribuir com PIX</h2>
-      <p class="pix-description">
-        Escaneie o QR Code abaixo para apoiar o desenvolvimento deste sistema.
-      </p>
-
-      <img src="assets/images/qr-code.png" alt="QR Code PIX" class="pix-qrcode">
-
-      <div class="rating-section">
-        <label>Você gostou da ideia deste projeto?</label>
-
-        <div class="star-rating" id="starRating">
-          <span onclick="setRating(1)">★</span>
-          <span onclick="setRating(2)">★</span>
-          <span onclick="setRating(3)">★</span>
-          <span onclick="setRating(4)">★</span>
-          <span onclick="setRating(5)">★</span>
+        <div class="how-card">
+          <span>2</span>
+          <h3>Envie a foto pelo WhatsApp</h3>
+          <p>
+            No formulário terá um botão escrito <strong>Enviar foto no WhatsApp</strong>.
+            A pessoa envia a foto diretamente para o número do Vitor Willian.
+          </p>
         </div>
 
-        <small id="ratingText">Clique para avaliar</small>
+        <div class="how-card">
+          <span>3</span>
+          <h3>O post já fica divulgado</h3>
+          <p>
+            Mesmo antes da foto ser colocada, o animal já aparece no site com as informações
+            principais para que outras pessoas possam ver e ajudar.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>4</span>
+          <h3>A foto será atualizada</h3>
+          <p>
+            Assim que o Vitor Willian visualizar a foto enviada pelo WhatsApp,
+            ele adicionará a imagem ao anúncio o mais rápido possível.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>5</span>
+          <h3>Por que será assim no começo?</h3>
+          <p>
+            Neste início, o site ainda não possui uma estrutura adequada para receber fotos
+            automaticamente. Por isso, o envio pelo WhatsApp será a forma mais segura e simples.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>6</span>
+          <h3>Todos podem ajudar</h3>
+          <p>
+            Qualquer pessoa poderá visualizar os anúncios, compartilhar e ajudar a informação
+            chegar até o dono ou até quem encontrou o animal.
+          </p>
+        </div>
       </div>
-
-      <label for="comentarioPix">Deixe um comentário de apoio</label>
-      <textarea id="comentarioPix" placeholder="Ex: Espero que esse projeto ajude muitos animais..."></textarea>
-      <button class="donation-button" onclick="salvarComentarioPix()">
-        Salvar comentário
-      </button>
     </div>
-  </div>
+  </section>
 
-  <!-- Modal de mensagem -->
-  <div class="custom-modal" id="customModal">
-    <div class="custom-modal-box">
-      <div class="custom-modal-icon" id="customModalIcon">✓</div>
+  <!-- DICAS / APOIO -->
+  <section class="tips-section" id="tips-section" style="display: none;">
+    <div class="how-container">
 
-      <h3 id="customModalTitle">Mensagem</h3>
+      <span class="section-kicker">🐾 Apoie a causa</span>
 
-      <p id="customModalText">
-        Texto da mensagem.
+      <h2>Ajude a proteger e salvar vidas 🐶🐱</h2>
+
+      <p class="how-intro">
+        O Encontre Meu Amigo é um movimento comunitário criado para ajudar animais perdidos,
+        encontrados e fortalecer ações de apoio em Três Lagoas - MS.
+        Toda ajuda faz diferença.
       </p>
 
-      <button class="btn primary full" onclick="fecharMensagemModal()">
-        Fechar
-      </button>
+      <div class="how-grid">
+
+        <div class="how-card">
+          <span>1</span>
+          <h3>Doe qualquer valor</h3>
+          <p>
+            Qualquer ajuda importa. Pode ser até mesmo <strong>R$ 0,01</strong>.
+            Pequenas contribuições somadas ajudam muito a manter o projeto funcionando.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>2</span>
+          <h3>Doe ração e suprimentos</h3>
+          <p>
+            Também aceitamos apoio com ração, medicamentos, cobertores, recipientes de água
+            e outros itens que possam ajudar animais necessitados.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>3</span>
+          <h3>Mais transparência no futuro</h3>
+          <p>
+            Em breve iremos buscar cuidadoras, voluntários e apoiadores da cidade
+            para trazer ainda mais transparência e confiança ao projeto.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>4</span>
+          <h3>Cuidado com golpes</h3>
+          <p>
+            Nunca envie dinheiro para contatos desconhecidos.
+            Sempre confirme informações diretamente pelo site oficial.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>5</span>
+          <h3>Use apenas o PIX oficial</h3>
+          <p>
+            Qualquer contribuição financeira deve ser enviada somente para a chave PIX
+            informada oficialmente dentro deste site.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <span>6</span>
+          <h3>Fique atento aos eventos</h3>
+          <p>
+            Futuramente teremos campanhas, arrecadações, eventos solidários e ações presenciais.
+            Sempre acompanhe o site para informações oficiais.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="tips-donation-box">
+        <h3>❤️ Toda ajuda importa</h3>
+
+        <p>
+          Este projeto nasceu para ajudar animais e famílias.
+          Seja com R$ 1, ração, compartilhamento ou apoio voluntário,
+          sua contribuição ajuda a salvar vidas.
+        </p>
+
+        <div class="pix-box">
+          696f6ef7-32d9-414f-9ba2-bd16b2d53ed5
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact-section" id="contact-section" style="display:none;">
+    <div class="how-container">
+
+      <span class="section-kicker">📞 Fale conosco</span>
+
+      <h2>Está com alguma dúvida?</h2>
+
+      <p class="how-intro">
+        Se você tiver qualquer dúvida sobre anúncios, divulgação, envio de fotos,
+        apoio ao projeto ou qualquer outra informação, fale diretamente conosco.
+      </p>
+
+      <div class="contact-box">
+        <div class="contact-icon">💬</div>
+
+        <h3>Atendimento via WhatsApp</h3>
+
+        <p>
+          Clique no botão abaixo para enviar sua mensagem diretamente no WhatsApp.
+          Responderemos assim que possível.
+        </p>
+
+        <a href="https://wa.me/5567935015153?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20site%20Encontre%20Meu%20Amigo."
+          target="_blank" class="btn-whatsapp-contact">
+          Falar no WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <strong>Encontre Meu Amigo</strong> &nbsp;·&nbsp; Três Lagoas - MS &nbsp;·&nbsp; Plataforma comunitária para animais perdidos e encontrados, desenvolvida pela Fe'&Tec.
+  </footer>
+
+  <!-- MODAL CADASTRO DE ANIMAL -->
+  <div class="animal-modal-overlay" id="animalModal">
+    <div class="animal-modal-box">
+      <button class="modal-close" onclick="closeAnimalModal()">✕</button>
+
+      <h2>Cadastrar animal</h2>
+      <p>Preencha as informações abaixo para divulgar o animal.</p>
+
+      <div class="user-status-box" id="userStatusBox">
+        <p id="userStatusText">Você ainda não está logado.</p>
+
+        <button type="button" class="login-toggle-btn" onclick="openLoginModal()">
+          Fazer login ou cadastro
+        </button>
+      </div>
+
+      <form id="animalForm">
+        <h3>Dados da pessoa</h3>
+
+        <input type="text" id="nomePessoa" placeholder="Seu nome" required>
+        <input type="tel" id="telefonePessoa" placeholder="WhatsApp para contato" required>
+
+        <h3>Dados do animal</h3>
+
+        <select id="tipoCadastro" required>
+          <option value="">O animal está...</option>
+          <option value="perdido">Perdido</option>
+          <option value="encontrado">Encontrado</option>
+        </select>
+
+        <input type="text" id="nomeAnimal" placeholder="Nome do animal, se souber">
+        <select id="categoriaAnimal" required>
+          <option value="">Categoria do animal</option>
+          <option value="cao">Cão</option>
+          <option value="gato">Gato</option>
+          <option value="outro">Outro</option>
+        </select>
+        <input type="text" id="racaAnimal" placeholder="Raça, se souber">
+        <input type="text" id="corAnimal" placeholder="Cor predominante">
+        <input type="text" id="bairroAnimal" placeholder="Bairro">
+        <input type="text" id="cidadeAnimal" value="Três Lagoas - MS">
+
+        <textarea id="descricaoAnimal" placeholder="Descreva detalhes importantes do animal"></textarea>
+
+        <button type="button" class="btn-photo-whatsapp" onclick="sendPhotoWhatsApp()">
+          Enviar foto no WhatsApp
+        </button>
+
+        <button type="submit" class="btn-save-animal">
+          Publicar anúncio
+        </button>
+      </form>
     </div>
   </div>
 
+  <!-- MODAL DE MENSAGEM GERAIS -->
+  <div class="message-modal-overlay" id="messageModal">
+    <div class="message-modal-box">
+      <h3 id="messageTitle">Aviso</h3>
+      <p id="messageText"></p>
+      <button onclick="closeMessageModal()">OK</button>
+    </div>
+  </div>
+
+
+  <!-- MODAL LOGIN / CADASTRO -->
+  <div class="animal-modal-overlay" id="loginModal">
+    <div class="animal-modal-box login-modal-box">
+      <button class="modal-close" onclick="closeLoginModal()">✕</button>
+
+      <h2>Acessar conta</h2>
+      <p>Entre com seu usuário ou crie um cadastro rápido.</p>
+
+      <div class="login-tabs">
+        <button type="button" onclick="showLoginMode()" id="btnLoginMode" class="active">
+          Login
+        </button>
+
+        <button type="button" onclick="showRegisterMode()" id="btnRegisterMode">
+          Criar cadastro
+        </button>
+      </div>
+
+      <div id="loginBox">
+        <input type="text" id="loginUsuario" placeholder="Usuário">
+        <div class="password-field">
+          <input type="password" id="loginPassword" placeholder="Senha">
+          <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">
+            👁️
+          </button>
+        </div>
+
+        <button type="button" class="btn-save-animal" onclick="loginUser()">
+          Logar
+        </button>
+      </div>
+
+      <div id="registerBox" style="display:none;">
+        <input type="text" id="registerNome" placeholder="Nome completo">
+        <input type="tel" id="registerTelefone" placeholder="WhatsApp">
+        <input type="text" id="registerUsuario" placeholder="Criar usuário">
+        <div class="password-field">
+          <input type="password" id="registerPassword" placeholder="Senha">
+          <button type="button" class="toggle-password" onclick="togglePassword('registerPassword', this)">
+            👁️
+          </button>
+        </div>
+
+        <button type="button" class="btn-save-animal" onclick="registerUser()">
+          Criar cadastro
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL PERFIL -->
+  <div class="animal-modal-overlay" id="profileModal">
+    <div class="animal-modal-box profile-modal-box">
+      <button class="modal-close" onclick="closeProfileModal()">✕</button>
+
+      <h2>Meu perfil</h2>
+      <p>Informações da sua conta cadastrada.</p>
+
+      <div class="profile-info">
+        <div>
+          <strong>Nome</strong>
+          <span id="profileNome">-</span>
+        </div>
+
+        <div>
+          <strong>WhatsApp</strong>
+          <span id="profileTelefone">-</span>
+        </div>
+
+        <div>
+          <strong>Usuário</strong>
+          <span id="profileUsuario">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL MEUS ANIMAIS -->
+  <div class="animal-modal-overlay" id="myAnimalsModal">
+    <div class="animal-modal-box profile-modal-box">
+      <button class="modal-close" onclick="closeMyAnimalsModal()">✕</button>
+
+      <h2>Meus animais cadastrados</h2>
+      <p>Veja os anúncios que você publicou no site.</p>
+
+      <div id="myAnimalsList" class="my-animals-list">
+        Carregando...
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3 id="modal-title">Trocar imagem</h3>
+      <p id="modal-desc">Clique na área abaixo para escolher uma foto do seu computador.</p>
+      <img id="modal-preview" class="modal-preview" alt="Preview">
+      <label class="modal-upload-label" for="modal-file-input">
+        <div class="mu-icon">📷</div>
+        Clique aqui para escolher a imagem
+      </label>
+      <input type="file" id="modal-file-input" accept="image/*" onchange="previewImage(event)">
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+        <button class="btn-save" onclick="saveImage()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+  <script src="firebase-config.js"></script>
   <script src="js/main.js"></script>
 </body>
 

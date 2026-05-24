@@ -1,5 +1,414 @@
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
+/* =====================================================
+   RESPONSIVIDADE COMPLETA — Encontre Meu Amigo
+   Breakpoints:
+     • 2560px+ → TV 4K / ultra-wide
+     • 1920px  → TV Full HD (design base)
+     • 1440px  → Monitor grande / laptop 15"
+     • 1280px  → Laptop 13-14"
+     • 1024px  → iPad landscape / small laptop
+     • 900px   → menu hambúrguer
+     • 768px   → tablet portrait
+     • 600px   → landscape smartphone
+     • 480px   → smartphone médio
+     • 360px   → smartphone pequeno
+===================================================== */
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =====================================================
+   2560px+ — TV 4K / ultra-wide
+===================================================== */
+@media (min-width: 2560px) {
+  nav {
+    max-width: 2400px;
+    height: 80px;
+    padding: 0 48px;
+    gap: 32px;
   }
+  .logo-img { width: 100px; height: 100px; margin-top: 48px; margin-right: 28px; }
+  .logo-text strong { font-size: 22px; }
+  .logo-text span   { font-size: 16px; }
+  .nav-links a { font-size: 16px; padding: 8px 18px; }
+  .btn-announce, .header-login-btn { font-size: 16px; padding: 12px 28px; }
+  .hero { min-height: 600px; }
+  .hero-text h1 { font-size: 60px; }
+  .hero-text p  { font-size: 18px; max-width: 560px; }
+  .search-bar { max-width: 1400px; }
+  .how-it-works-section, .section { max-width: 1600px; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+}
+
+/* =====================================================
+   1440px — Monitor grande / laptop 15"
+===================================================== */
+@media (max-width: 1440px) {
+  nav { padding: 0 20px; gap: 16px; }
+  .logo-img { width: 80px; height: 80px; margin-top: 36px; margin-right: 16px; }
+  .nav-links a { font-size: 13px; padding: 6px 11px; }
+  .hero-text h1 { font-size: 40px; }
+  .search-bar   { max-width: 1000px; }
+}
+
+/* =====================================================
+   1280px — Laptop 13-14"
+===================================================== */
+@media (max-width: 1280px) {
+  nav { padding: 0 16px; gap: 10px; }
+  .logo-img { width: 72px; height: 72px; margin-top: 32px; margin-right: 12px; }
+  .logo-text strong { font-size: 15px; }
+  .logo-text span   { font-size: 12px; }
+  .nav-links a { font-size: 12px; padding: 5px 9px; }
+  .btn-announce, .header-login-btn { font-size: 13px; padding: 9px 16px; }
+  .hero-text h1 { font-size: 36px; }
+  .hero-card    { max-width: 210px; padding: 20px 16px; }
+  .search-bar   { max-width: 900px; }
+  .how-it-works-section, .section { max-width: 1100px; }
+}
+
+/* =====================================================
+   1024px — iPad landscape / small laptop
+===================================================== */
+@media (max-width: 1024px) {
+  nav {
+    height: auto;
+    min-height: 70px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .logo-img { width: 62px; height: 62px; margin-top: 0; margin-right: 10px; }
+  .logo-area { flex-shrink: 0; }
+  .nav-right { margin-left: auto; }
+
+  .hero { min-height: 480px; }
+  .hero-content { position: relative; left: 0; padding: 50px 20px 90px; gap: 28px; }
+  .hero-text h1 { font-size: 34px; }
+  .hero-text p  { font-size: 14px; max-width: 360px; }
+  .hero-card    { max-width: 200px; }
+
+  .search-bar { width: calc(100% - 32px); margin-top: -36px; padding: 18px 20px; gap: 14px; }
+
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .how-it-works-section, .section { padding: 32px 20px; }
+}
+
+/* =====================================================
+   900px — Menu hambúrguer
+   HTML: logo-area → menu-toggle → nav-links → nav-right
+   Visual: [logo ←→ nav-right | toggle] / dropdown abaixo
+===================================================== */
+@media (max-width: 900px) {
+
+  nav {
+    position: relative;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 16px;
+    height: auto;
+    min-height: 64px;
+    gap: 0;
+  }
+
+  /* Logo esquerda, cresce para empurrar os outros */
+  .logo-area {
+    order: 1;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Botões Anunciar + Login: direita do logo */
+  .nav-right {
+    order: 2;
+    margin-left: 0;
+    gap: 8px;
+  }
+
+  /* Hambúrguer: depois dos botões */
+  .menu-toggle {
+    order: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-left: 8px;
+    border: none;
+    background: var(--green);
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Dropdown: linha abaixo, largura total */
+  .nav-links {
+    order: 4;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: white;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    padding: 10px 16px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 200;
+    transform: none;
+    border-radius: 0;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-links li { list-style: none; width: 100%; }
+
+  .nav-links li a,
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border-bottom: none !important;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .nav-links li a:hover,
+  .nav-links a:hover {
+    background: var(--green-light);
+    color: var(--green);
+  }
+
+  .nav-links a.active {
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 10px;
+  }
+}
+
+/* =====================================================
+   768px — Tablet portrait
+===================================================== */
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+
+  nav { padding: 8px 14px; min-height: 60px; }
+  .logo-img { width: 54px; height: 54px; margin-top: 0; margin-right: 8px; }
+  .logo-text strong { font-size: 14px; }
+  .logo-text span   { font-size: 11px; }
+  .btn-announce, .header-login-btn { font-size: 12px; padding: 8px 12px; }
+
+  .hero { min-height: 520px; background-position: center top; }
+  .hero-content { padding: 45px 16px 95px; flex-direction: column; align-items: flex-start; }
+  .hero-card    { display: none; }
+  .hero-text h1 { font-size: 30px; }
+  .hero-text p  { font-size: 13px; max-width: 100%; }
+  .hero-btns    { flex-direction: column; gap: 10px; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+  .hero-stats   { gap: 14px; flex-wrap: wrap; }
+
+  /* ── SEARCH BAR — todos os campos em coluna, sem gap exagerado ── */
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;              /* gap pequeno entre os itens */
+    padding: 16px;
+    margin-top: -20px;
+    width: calc(100% - 32px);
+  }
+
+  .search-label { margin-bottom: 4px; }
+
+  /* Remove o flex-direction: column interno dos select-wrap
+     para que label + select fiquem próximos sem espaço extra */
+  .search-select-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;              /* label colada no select */
+    width: 100%;
+    min-width: unset;
+  }
+
+  .search-select-wrap label { font-size: 12px; margin: 0; }
+  .search-select-wrap select { width: 100%; }
+
+  .search-input-wrap { width: 100%; min-width: unset; }
+  .search-input-wrap input { width: 100%; }
+
+  .btn-search { width: 100%; justify-content: center; margin-top: 4px; }
+
+  .section { padding: 28px 16px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+  .how-it-works-section { padding: 0 16px; margin: 28px auto; }
+  .how-container        { padding: 20px; }
+  .how-grid             { grid-template-columns: 1fr; gap: 14px; }
+  .how-container h2     { font-size: 24px; }
+
+  .features-inner { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .animal-modal-box  { padding: 20px; max-height: 88vh; }
+  .login-modal-box,
+  .profile-modal-box,
+  .message-modal-box { width: 94%; padding: 22px; }
+
+  footer { font-size: 12px; padding: 20px 16px; }
+}
+
+/* =====================================================
+   600px — Landscape smartphone
+===================================================== */
+@media (max-width: 600px) {
+  .hero { min-height: 360px; background-position: center; }
+  .hero-content { padding: 32px 14px 80px; }
+  .hero-text h1 { font-size: 26px; line-height: 1.2; }
+  .hero-text p  { font-size: 13px; margin-bottom: 20px; }
+  .hero-stats   { flex-wrap: wrap; gap: 10px; }
+  .hero-stat strong { font-size: 18px; }
+  .hero-stat span   { font-size: 10px; }
+
+  /* Search continua em coluna no portrait, mas fica compacta */
+  .search-bar { gap: 8px; padding: 14px; }
+
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  .features-inner { grid-template-columns: 1fr; }
+
+  .login-tabs { flex-direction: row; }
+  .login-tabs button { font-size: 13px; padding: 12px 8px; }
+
+  .animal-modal-box { padding: 18px; }
+}
+
+/* =====================================================
+   480px — Smartphone médio (portrait)
+===================================================== */
+@media (max-width: 480px) {
+  nav { padding: 8px 12px; gap: 0; }
+
+  .logo-img { width: 46px; height: 46px; }
+  .logo-text strong { font-size: 13px; }
+  .logo-text span   { display: none; }
+
+  .nav-right { gap: 6px; }
+  .btn-announce, .header-login-btn { font-size: 11px; padding: 7px 10px; border-radius: 10px; }
+  .menu-toggle { width: 36px; height: 36px; font-size: 18px; margin-left: 6px; }
+
+  .hero { min-height: 500px; }
+  .hero-content { padding: 38px 14px 90px; }
+  .hero-text h1 { font-size: 24px; }
+  .hero-stats   { flex-direction: column; gap: 8px; }
+
+  /* Search compacta no celular */
+  .search-bar {
+    gap: 8px;
+    padding: 14px;
+    margin-top: -16px;
+    border-radius: 10px;
+    width: calc(100% - 24px);
+  }
+
+  .search-label { font-size: 14px; margin-bottom: 2px; }
+
+  /* Tipo e Categoria lado a lado para economizar altura */
+  .search-selects-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .search-select-wrap { gap: 3px; }
+  .search-select-wrap label  { font-size: 11px; }
+  .search-select-wrap select { padding: 9px 10px; font-size: 13px; }
+
+  .search-input-wrap input { font-size: 14px; }
+
+  .btn-search { padding: 12px; font-size: 14px; }
+
+  .cards-grid { grid-template-columns: 1fr; gap: 12px; }
+  .animal-card-img { aspect-ratio: 16/9; }
+
+  .section { padding: 24px 12px; }
+  .section-title { font-size: 17px; }
+
+  .how-container    { padding: 18px; }
+  .how-container h2 { font-size: 20px; }
+  .how-card         { padding: 16px; }
+
+  .features-inner { padding: 24px 12px; gap: 16px; }
+
+  .tips-donation-box, .contact-box { padding: 22px 16px; }
+  .tips-donation-box h3, .contact-box h3 { font-size: 20px; }
+  .pix-box { font-size: 15px; padding: 12px 18px; }
+
+  .login-tabs { flex-direction: column; }
+  .login-tabs button { padding: 12px; }
+  .login-modal-box h2 { font-size: 26px; }
+
+  .animal-modal-box { padding: 16px; border-radius: 16px; }
+
+  footer { font-size: 11px; padding: 18px 10px; }
+}
+
+/* =====================================================
+   360px — Smartphone pequeno
+===================================================== */
+@media (max-width: 360px) {
+  .logo-img { width: 40px; height: 40px; }
+  .logo-text strong { font-size: 12px; }
+
+  .btn-announce, .header-login-btn { font-size: 10px; padding: 7px 8px; }
+  .menu-toggle { width: 32px; height: 32px; font-size: 16px; }
+
+  .hero { min-height: 480px; }
+  .hero-text h1 { font-size: 21px; }
+  .hero-text p  { font-size: 12px; }
+
+  .btn-primary, .btn-outline { font-size: 13px; padding: 10px 16px; }
+
+  .section-title { font-size: 15px; }
+  .cards-grid    { gap: 10px; }
+  .search-bar    { padding: 12px; gap: 6px; }
+}
+
+/* =====================================================
+   LANDSCAPE — celular girado (altura < 500px)
+===================================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { min-height: 260px; }
+  .hero-content { padding: 20px 16px 60px; }
+  .hero-text h1 { font-size: 22px; margin-bottom: 8px; }
+  .hero-text p  { margin-bottom: 12px; font-size: 12px; }
+  .hero-stats   { display: none; }
+
+  /* Search em linha no landscape */
+  .search-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: -14px;
+    align-items: flex-end;
+  }
+  .search-label        { width: 100%; margin-bottom: 0; }
+  .search-input-wrap   { flex: 2 1 140px; }
+  .search-select-wrap  { flex: 1 1 90px; }
+  .btn-search          { flex: 0 0 auto; }
+}
+
+/* =====================================================
+   PRINT
+===================================================== */
+@media print {
+  header, .hero, .search-bar, footer { display: none; }
+  .section { padding: 0; }
+  .cards-grid { grid-template-columns: repeat(3, 1fr); }
 }

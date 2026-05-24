@@ -1,655 +1,673 @@
 /*================
-DADOS INICIAIS
+CARDS DOS ANIMAIS - FIREBASE
 =================*/
-let animals = [
-    {
-        id: 1,
-        tipoCadastro: 'encontrador',
-        nomeAnimal: 'Rex',
-        raca: 'Vira-lata',
-        cor: 'Caramelo',
-        porte: 'Médio',
-        sexo: 'Macho',
-        status: 'encontrado',
-        local: 'Próximo à praça central',
-        bairro: 'Centro',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-20',
-        nomePessoa: 'João Silva',
-        telefone: '67999999999',
-        obs: 'Estava com coleira azul.',
-        foto: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 2,
-        tipoCadastro: 'dono',
-        nomeAnimal: 'Luna',
-        raca: 'Sem raça definida',
-        cor: 'Preta com branco',
-        porte: 'Pequeno',
-        sexo: 'Fêmea',
-        status: 'perdido',
-        local: 'Vista perto de uma farmácia',
-        bairro: 'Vila Nova',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-18',
-        nomePessoa: 'Maria Oliveira',
-        telefone: '67988887777',
-        obs: 'Muito assustada.',
-        foto: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 3,
-        tipoCadastro: 'encontrador',
-        nomeAnimal: 'Thor',
-        raca: 'Labrador',
-        cor: 'Dourado',
-        porte: 'Grande',
-        sexo: 'Macho',
-        status: 'encontrado',
-        local: 'Perto do supermercado',
-        bairro: 'Jardim Alvorada',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-15',
-        nomePessoa: 'Carlos Mendes',
-        telefone: '67991112222',
-        obs: 'Muito dócil.',
-        foto: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 4,
-        tipoCadastro: 'dono',
-        nomeAnimal: 'Mel',
-        raca: 'Pinscher',
-        cor: 'Preta',
-        porte: 'Pequeno',
-        sexo: 'Fêmea',
-        status: 'perdido',
-        local: 'Saiu correndo perto de casa',
-        bairro: 'Interlagos',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-17',
-        nomePessoa: 'Fernanda Souza',
-        telefone: '67992223333',
-        obs: 'Tem uma coleira rosa.',
-        foto: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 5,
-        tipoCadastro: 'encontrador',
-        nomeAnimal: 'Bob',
-        raca: 'Golden Retriever',
-        cor: 'Dourado',
-        porte: 'Grande',
-        sexo: 'Macho',
-        status: 'encontrado',
-        local: 'Praça esportiva',
-        bairro: 'Santa Luzia',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-14',
-        nomePessoa: 'Ricardo Lima',
-        telefone: '67993334444',
-        obs: 'Bem alimentado.',
-        foto: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 6,
-        tipoCadastro: 'dono',
-        nomeAnimal: 'Nina',
-        raca: 'Shih Tzu',
-        cor: 'Branca',
-        porte: 'Pequeno',
-        sexo: 'Fêmea',
-        status: 'perdido',
-        local: 'Perto da escola municipal',
-        bairro: 'Parque São Carlos',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-13',
-        nomePessoa: 'Amanda Rocha',
-        telefone: '67994445555',
-        obs: 'Pelagem aparada.',
-        foto: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 7,
-        tipoCadastro: 'encontrador',
-        nomeAnimal: 'Max',
-        raca: 'Pastor Alemão',
-        cor: 'Marrom e preto',
-        porte: 'Grande',
-        sexo: 'Macho',
-        status: 'encontrado',
-        local: 'Próximo ao terminal',
-        bairro: 'Centro',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-12',
-        nomePessoa: 'Paulo Henrique',
-        telefone: '67995556666',
-        obs: 'Muito atento.',
-        foto: 'https://images.unsplash.com/photo-1561037404-61cd46aa615b?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 8,
-        tipoCadastro: 'dono',
-        nomeAnimal: 'Belinha',
-        raca: 'Poodle',
-        cor: 'Branca',
-        porte: 'Pequeno',
-        sexo: 'Fêmea',
-        status: 'perdido',
-        local: 'Rua da igreja',
-        bairro: 'Santos Dumont',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-11',
-        nomePessoa: 'Luciana Alves',
-        telefone: '67996667777',
-        obs: 'Muito carinhosa.',
-        foto: 'https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 9,
-        tipoCadastro: 'encontrador',
-        nomeAnimal: 'Toby',
-        raca: 'Beagle',
-        cor: 'Marrom, branco e preto',
-        porte: 'Médio',
-        sexo: 'Macho',
-        status: 'encontrado',
-        local: 'Ao lado do mercado',
-        bairro: 'Ipacarai',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-10',
-        nomePessoa: 'Eduardo Martins',
-        telefone: '67997778888',
-        obs: 'Muito brincalhão.',
-        foto: 'https://images.unsplash.com/photo-1505628346881-b72b27e84530?auto=format&fit=crop&w=900&q=80'
-    },
-    {
-        id: 10,
-        tipoCadastro: 'dono',
-        nomeAnimal: 'Pandora',
-        raca: 'Border Collie',
-        cor: 'Preta e branca',
-        porte: 'Médio',
-        sexo: 'Fêmea',
-        status: 'perdido',
-        local: 'Perto do posto',
-        bairro: 'Jardim Brasília',
-        cidade: 'Três Lagoas',
-        dataEncontrado: '2026-05-09',
-        nomePessoa: 'Gustavo Pereira',
-        telefone: '67998889999',
-        obs: 'Responde pelo nome.',
-        foto: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=80'
-    }
-];
+let allFirebaseAnimals = [];
+
+async function buildCards(filter = 'all') {
+  currentFilter = filter;
+
+  const grid = document.getElementById('cards-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '<p>Carregando anúncios...</p>';
+
+  try {
+    const snapshot = await db.collection('sitepet_animais')
+      .orderBy('criadoEm', 'desc')
+      .get();
+
+    allFirebaseAnimals = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    renderFilteredCards();
+
+  } catch (error) {
+    console.error(error);
+    grid.innerHTML = '<p>Erro ao carregar os anúncios.</p>';
+  }
+}
 
 /*================
-VARIÁVEIS GLOBAIS
+MODAL CADASTRO ANIMAL
 =================*/
-let avaliacaoSelecionada = 0;
-let statusAtual = '';
-let paginaAtual = 1;
-const itensPorPagina = 6;
+function openAnimalModal(event) {
+    event.preventDefault();
 
-/*================
-NAVEGAÇÃO
-=================*/
-function setActive(btn) {
-    document.querySelectorAll('.nav-btn').forEach(b => {
-        b.classList.remove('active');
-    });
+    document.getElementById('animalModal').classList.add('open');
 
-    if (btn) {
-        btn.classList.add('active');
+    const loginBtn = document.querySelector('.login-toggle-btn');
+    const statusText = document.getElementById('userStatusText');
+
+    if (!loggedUser) {
+        if (loginBtn) loginBtn.style.display = 'block';
+        if (statusText) statusText.textContent = 'Você ainda não está logado.';
+        openLoginModal();
+    } else {
+        fillUserData();
     }
 }
 
-function showScreen(id, btn) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
+function closeAnimalModal() {
+    document.getElementById('animalModal').classList.remove('open');
+}
+
+function toggleLoginArea() {
+    document.getElementById('loginArea').classList.toggle('active');
+}
+
+function sendPhotoWhatsApp() {
+    const nomePessoa = document.getElementById('nomePessoa').value || 'Não informado';
+    const telefonePessoa = document.getElementById('telefonePessoa').value || 'Não informado';
+    const tipoCadastro = document.getElementById('tipoCadastro').value || 'Não informado';
+    const nomeAnimal = document.getElementById('nomeAnimal').value || 'Sem nome';
+    const racaAnimal = document.getElementById('racaAnimal').value || 'Não informada';
+    const corAnimal = document.getElementById('corAnimal').value || 'Não informada';
+    const bairroAnimal = document.getElementById('bairroAnimal').value || 'Não informado';
+    const cidadeAnimal = document.getElementById('cidadeAnimal').value || 'Não informada';
+    const descricaoAnimal = document.getElementById('descricaoAnimal').value || 'Sem descrição';
+
+    const mensagem = `
+        Olá! Quero enviar a foto de um animal para o site Encontre Meu Amigo.
+
+        DADOS DA PESSOA
+        Nome: ${nomePessoa}
+        WhatsApp: ${telefonePessoa}
+
+        DADOS DO ANIMAL
+        Situação: ${tipoCadastro}
+        Nome: ${nomeAnimal}
+        Raça: ${racaAnimal}
+        Cor: ${corAnimal}
+        Bairro: ${bairroAnimal}
+        Cidade: ${cidadeAnimal}
+
+        Descrição:
+        ${descricaoAnimal}
+
+        Vou enviar a foto logo em seguida.
+    `;
+
+        const msg = encodeURIComponent(mensagem);
+
+        window.open(`https://wa.me/5567935015153?text=${msg}`, '_blank');
+    }
+
+/*================
+FILTROS DE BUSCA
+=================*/
+function applySearchFilters() {
+  renderFilteredCards();
+}
+
+function renderFilteredCards() {
+  const grid = document.getElementById('cards-grid');
+  if (!grid) return;
+
+  const searchText = document.getElementById('searchText')?.value.toLowerCase().trim() || '';
+  const filterTipo = document.getElementById('filterTipo')?.value || 'all';
+  const filterCategoria = document.getElementById('filterCategoria')?.value || 'all';
+  const filterBairro = document.getElementById('filterBairro')?.value.toLowerCase().trim() || '';
+
+  let animals = [...allFirebaseAnimals];
+
+  if (currentFilter === 'lost') animals = animals.filter(a => a.tipoCadastro === 'perdido');
+  if (currentFilter === 'found') animals = animals.filter(a => a.tipoCadastro === 'encontrado');
+
+  if (filterTipo !== 'all') {
+    animals = animals.filter(a => a.tipoCadastro === filterTipo);
+  }
+
+  if (filterCategoria !== 'all') {
+    animals = animals.filter(a => a.categoriaAnimal === filterCategoria);
+  }
+
+  if (searchText) {
+    animals = animals.filter(a =>
+      (a.nomeAnimal || '').toLowerCase().includes(searchText) ||
+      (a.racaAnimal || '').toLowerCase().includes(searchText) ||
+      (a.corAnimal || '').toLowerCase().includes(searchText)
+    );
+  }
+
+  if (filterBairro) {
+    animals = animals.filter(a =>
+      (a.bairroAnimal || '').toLowerCase().includes(filterBairro)
+    );
+  }
+
+  if (animals.length === 0) {
+    grid.innerHTML = '<p>Nenhum animal encontrado.</p>';
+    return;
+  }
+
+  grid.innerHTML = animals.map(a => {
+    const tagClass = a.tipoCadastro === 'perdido' ? 'tag-lost' : 'tag-found';
+    const tagLabel = a.tipoCadastro === 'perdido' ? 'Perdido' : 'Encontrado';
+
+    const nome = a.nomeAnimal || 'Sem nome';
+    const raca = a.racaAnimal || 'Raça não informada';
+    const bairro = a.bairroAnimal || 'Bairro não informado';
+
+    let dataFormatada = 'Data não informada';
+
+    if (a.criadoEm && a.criadoEm.toDate) {
+      dataFormatada = a.criadoEm.toDate().toLocaleDateString('pt-BR');
+    }
+
+    const imgEl = a.foto
+      ? `<img src="${a.foto}" alt="${nome}">`
+      : `<div class="img-hint"><span>🐾</span><small>Foto em análise</small></div>`;
+
+    return `
+      <div class="animal-card">
+        <div class="animal-card-img">
+          <span class="tag ${tagClass}">${tagLabel}</span>
+          ${imgEl}
+        </div>
+
+        <div class="animal-card-body">
+          <h4>${nome}</h4>
+          <div class="breed">${raca}</div>
+
+          <div class="animal-card-meta">
+            <span>📍 ${bairro}</span>
+            <span>📅 ${dataFormatada}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/*===================
+    MENU DE CONTA
+=====================*/
+function toggleAccountMenu() {
+  document.getElementById('accountDropdown').classList.toggle('open');
+}
+
+function logout() {
+  localStorage.removeItem('sitepet_logged_user');
+  loggedUser = null;
+
+  const dropdown = document.getElementById('accountDropdown');
+  if (dropdown) dropdown.classList.remove('open');
+
+  updateHeaderAccountUI();
+
+  showMessage('Logout', 'Você saiu da sua conta.');
+}
+
+document.addEventListener('click', function (e) {
+  const menu = document.querySelector('.account-menu');
+
+  if (menu && !menu.contains(e.target)) {
+    document.getElementById('accountDropdown')?.classList.remove('open');
+  }
+});
+
+/*========================================
+ATUALIZAÇÃO DA INTERFACE DO MENU DE CONTA
+==========================================*/
+function updateHeaderAccountUI() {
+  const loginBtn = document.getElementById('loginHeaderBtn');
+  const accountMenu = document.getElementById('accountMenuWrapper');
+
+  if (!loginBtn || !accountMenu) return;
+
+  if (loggedUser) {
+    loginBtn.classList.add('hidden');
+    accountMenu.classList.remove('hidden');
+  } else {
+    loginBtn.classList.remove('hidden');
+    accountMenu.classList.add('hidden');
+  }
+}
+
+/*================
+MENU / NAVEGAÇÃO
+=================*/
+const menuLinks = document.querySelectorAll('.nav-links a');
+const heroSection = document.getElementById('home-section');
+const animalsSection = document.getElementById('animals-section');
+const searchBar = document.querySelector('.search-bar');
+const howSection = document.getElementById('how-section');
+const featuresSection = document.querySelector('.features');
+const tipsSection = document.getElementById('tips-section');
+const contactSection = document.getElementById('contact-section');
+const tipoFilterWrapper = document.getElementById('tipoFilterWrapper');
+
+function resetSections() {
+    if (heroSection) heroSection.style.display = 'none';
+    if (searchBar) searchBar.style.display = 'none';
+    if (animalsSection) animalsSection.style.display = 'none';
+    if (featuresSection) featuresSection.style.display = 'none';
+    if (howSection) howSection.style.display = 'none';
+    if (tipsSection) tipsSection.style.display = 'none';
+    if (contactSection) contactSection.style.display = 'none';
+}
+
+menuLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        menuLinks.forEach(item => item.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelector('.nav-links')?.classList.remove('open');
+
+        const page = this.dataset.page;
+
+        refreshCardsIfNeeded(page);
+
+        if (page === 'home') {
+            resetSections();
+
+            heroSection.style.display = 'flex';
+            searchBar.style.display = 'flex';
+            animalsSection.style.display = 'block';
+            featuresSection.style.display = 'block';
+
+            searchBar.classList.remove('hidden-hero');
+
+            if (tipoFilterWrapper) {
+                tipoFilterWrapper.style.display = 'flex';
+            }
+
+            buildCards('all');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        if (page === 'lost') {
+            resetSections();
+
+            searchBar.style.display = 'flex';
+            animalsSection.style.display = 'block';
+            featuresSection.style.display = 'block';
+
+            searchBar.classList.add('hidden-hero');
+
+            if (tipoFilterWrapper) {
+                tipoFilterWrapper.style.display = 'none';
+            }
+
+            buildCards('lost');
+
+            animalsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        if (page === 'found') {
+            resetSections();
+
+            searchBar.style.display = 'flex';
+            animalsSection.style.display = 'block';
+            featuresSection.style.display = 'block';
+
+            searchBar.classList.add('hidden-hero');
+
+            if (tipoFilterWrapper) {
+                tipoFilterWrapper.style.display = 'none';
+            }
+
+            buildCards('found');
+
+            animalsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        if (page === 'how') {
+            resetSections();
+
+            howSection.style.display = 'block';
+
+            howSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        if (page === 'tips') {
+            resetSections();
+
+            tipsSection.style.display = 'block';
+
+            tipsSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        if (page === 'contact') {
+            resetSections();
+
+            contactSection.style.display = 'block';
+
+            contactSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
+});
 
-    document.getElementById(id).classList.add('active');
+/*========================
+  LOGIN / CADASTRO USUÁRIO
+==========================*/
+let loggedUser = null;
+localStorage.removeItem('sitepet_logged_user');
 
-    if (btn) {
-        setActive(btn);
-    } else {
-        const map = {
-            home: 0,
-            cadastro: 1,
-            lista: 2
+function openLoginModal() {
+    document.getElementById('loginModal').classList.add('open');
+}
+
+function closeLoginModal() {
+    document.getElementById('loginModal').classList.remove('open');
+}
+
+function showLoginMode() {
+    document.getElementById('loginBox').style.display = 'block';
+    document.getElementById('registerBox').style.display = 'none';
+
+    document.getElementById('btnLoginMode').classList.add('active');
+    document.getElementById('btnRegisterMode').classList.remove('active');
+}
+
+function showRegisterMode() {
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('registerBox').style.display = 'block';
+
+    document.getElementById('btnLoginMode').classList.remove('active');
+    document.getElementById('btnRegisterMode').classList.add('active');
+}
+
+async function registerUser() {
+    const nome = document.getElementById('registerNome').value.trim();
+    const telefone = document.getElementById('registerTelefone').value.trim();
+    const usuario = document.getElementById('registerUsuario').value.trim();
+    const senha = document.getElementById('registerPassword').value.trim();
+
+    if (!nome || !telefone || !usuario || !senha) {
+        showMessage('Atenção', 'Preencha todos os campos para criar o cadastro.');
+        return;
+    }
+
+    try {
+        const existingUser = await db.collection('sitepet_usuarios')
+            .where('usuario', '==', usuario)
+            .get();
+
+        if (!existingUser.empty) {
+            showMessage('Atenção', 'Esse usuário já existe. Escolha outro nome de usuário.');
+            return;
+        }
+
+        const docRef = await db.collection('sitepet_usuarios').add({
+            nome,
+            telefone,
+            usuario,
+            senha,
+            criadoEm: new Date()
+        });
+
+        loggedUser = {
+            id: docRef.id,
+            nome,
+            telefone,
+            usuario,
+            senha
         };
 
-        setActive(document.querySelectorAll('.nav-btn')[map[id]]);
-    }
+        localStorage.setItem('sitepet_logged_user', JSON.stringify(loggedUser));
 
-    if (id === 'lista') {
-        renderCards();
-    }
+        fillUserData();
+        updateHeaderAccountUI();
+        closeLoginModal();
 
-    updateTotal();
+        showMessage('Sucesso', 'Cadastro realizado e login efetuado com sucesso.');
 
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-/*================
-STATUS DO CADASTRO
-=================*/
-function setStatusTab(status, btn) {
-    statusAtual = status;
-    paginaAtual = 1;
-
-    document.querySelectorAll('.tab-btn').forEach(botao => {
-        botao.classList.remove('active');
-    });
-
-    btn.classList.add('active');
-    renderCards();
-}
-
-/*================
-LOCALIZAÇÃO
-=================*/
-function fakeLocation() {
-    document.getElementById('locText').textContent =
-        'Localização marcada: -20.7849, -51.7007 (demo)';
-}
-
-/*================
-UPLOAD DE IMAGEM
-=================*/
-document.getElementById('foto').addEventListener('change', e => {
-    const arquivo = e.target.files[0];
-    const fileName = document.getElementById('fileName');
-    const preview = document.getElementById('preview');
-
-    if (arquivo) {
-        fileName.textContent = arquivo.name;
-        preview.src = URL.createObjectURL(arquivo);
-        preview.style.display = 'block';
-    } else {
-        fileName.textContent = 'Nenhuma foto selecionada';
-        preview.style.display = 'none';
-    }
-});
-
-/*================
-CADASTRO DE ANIMAL
-=================*/
-document.getElementById('animalForm').addEventListener('submit', e => {
-    e.preventDefault();
-
-    animals.unshift({
-        id: Date.now(),
-        tipoCadastro: val('tipoCadastro'),
-        nomeAnimal: val('nomeAnimal') || 'Nome não informado',
-        raca: val('raca') || 'Não informada',
-        cor: val('cor') || 'Não informada',
-        porte: val('porte'),
-        sexo: val('sexo'),
-        status: val('status'),
-        local: val('local') || 'Não informado',
-        bairro: val('bairro') || 'Não informado',
-        cidade: val('cidade') || 'Não informada',
-        dataEncontrado: val('dataEncontrado') || new Date().toISOString().slice(0, 10),
-        nomePessoa: val('nomePessoa') || 'Não informado',
-        telefone: val('telefone') || '',
-        obs: val('obs') || 'Sem observações.',
-        foto: document.getElementById('preview').src || 'https://via.placeholder.com/800x500?text=Sem+Foto'
-    });
-
-    mostrarMensagemModal(
-    'Cadastro realizado!',
-    'O animal foi cadastrado com sucesso na demonstração.',
-    'success'
-    );
-
-    e.target.reset();
-
-    document.getElementById('preview').style.display = 'none';
-    document.getElementById('fileName').textContent = 'Nenhuma foto selecionada';
-    document.getElementById('locText').textContent = 'Nenhuma localização marcada';
-
-    showScreen('lista');
-});
-
-
-/*================
-FORMULÁRIO DINÂMICO
-=================*/
-function atualizarFormularioPorTipo() {
-    const tipoCadastro = document.getElementById('tipoCadastro');
-    const status = document.getElementById('status');
-    const statusField = document.querySelector('.status-field');
-
-    if (!tipoCadastro || !status || !statusField) return;
-
-    if (tipoCadastro.value === 'encontrador') {
-        status.value = 'encontrado';
-        statusField.classList.add('hidden-field');
-    }
-
-    if (tipoCadastro.value === 'dono') {
-        status.value = 'perdido';
-        statusField.classList.add('hidden-field');
+    } catch (error) {
+        console.error(error);
+        showMessage('Erro', 'Não foi possível criar o cadastro. Tente novamente.');
     }
 }
 
-document.getElementById('tipoCadastro').addEventListener('change', atualizarFormularioPorTipo);
+async function loginUser() {
+    const usuario = document.getElementById('loginUsuario').value.trim();
+    const senha = document.getElementById('loginPassword').value.trim();
 
-
-/*================
-UTILITÁRIOS
-=================*/
-function val(id) {
-    return document.getElementById(id).value.trim();
-}
-
-function onlyNumbers(valor) {
-    return String(valor || '').replace(/\D/g, '');
-}
-
-function formatDate(data) {
-    if (!data) return '-';
-
-    const [ano, mes, dia] = data.split('-');
-    return `${dia}/${mes}/${ano}`;
-}
-
-/*================
-LISTAGEM DE ANIMAIS
-=================*/
-function renderCards() {
-    const busca = (document.getElementById('search')?.value || '').toLowerCase();
-    const porteFiltro = document.getElementById('porteFilter')?.value || '';
-
-    const wrap = document.getElementById('cards');
-    const pagination = document.getElementById('pagination');
-
-    wrap.innerHTML = '';
-    pagination.innerHTML = '';
-
-    const filtrados = animals.filter(animal => {
-        const texto = `
-            ${animal.nomeAnimal}
-            ${animal.bairro}
-            ${animal.cidade}
-            ${animal.cor}
-            ${animal.porte}
-            ${animal.raca}
-            ${animal.tipoCadastro}
-        `.toLowerCase();
-
-        return texto.includes(busca) &&
-            (!statusAtual || animal.status === statusAtual) &&
-            (!porteFiltro || animal.porte === porteFiltro);
-    });
-
-    if (!filtrados.length) {
-        wrap.innerHTML = `
-            <div class="empty">
-                Nenhum animal encontrado com esses filtros.
-            </div>
-        `;
+    if (!usuario || !senha) {
+        showMessage('Atenção', 'Informe usuário e senha.');
         return;
     }
 
-    const totalPaginas = Math.ceil(filtrados.length / itensPorPagina);
-    const inicio = (paginaAtual - 1) * itensPorPagina;
-    const fim = inicio + itensPorPagina;
-    const animaisPagina = filtrados.slice(inicio, fim);
+    try {
+        const userSnapshot = await db.collection('sitepet_usuarios')
+            .where('usuario', '==', usuario)
+            .where('senha', '==', senha)
+            .get();
 
-    animaisPagina.forEach(animal => {
-        wrap.innerHTML += `
-            <article class="card">
-                <div class="card-img">
-                    <img src="${animal.foto}">
-                    <span class="badge ${animal.status === 'encontrado' ? 'found' : 'lost'}">
-                        ${animal.status === 'encontrado' ? 'Encontrado' : 'Perdido'}
-                    </span>
-                </div>
+        if (userSnapshot.empty) {
+            showMessage('Atenção', 'Usuário ou senha incorretos.');
+            return;
+        }
 
-                <div class="card-body">
-                    <h3>${animal.nomeAnimal}</h3>
+        const userDoc = userSnapshot.docs[0];
+        loggedUser = {
+            id: userDoc.id,
+            ...userDoc.data()
+        };
 
-                    <p style="color:var(--muted)">
-                        ${animal.raca} • ${animal.cor}
-                    </p>
+        localStorage.setItem('sitepet_logged_user', JSON.stringify(loggedUser));
 
-                    <div class="meta">
-                        <p><strong>Porte</strong><br>${animal.porte}</p>
-                        <p><strong>Bairro</strong><br>${animal.bairro}</p>
-                        <p><strong>Cidade</strong><br>${animal.cidade}</p>
-                        <p><strong>Cadastro</strong><br>${formatTipoCadastro(animal.tipoCadastro)}</p>
-                    </div>
+        fillUserData();
+        updateHeaderAccountUI();
+        closeLoginModal();
 
-                    <div class="card-actions">
-                        <button class="btn primary" onclick="details(${animal.id})">
-                            Ver detalhes
-                        </button>
+        showMessage('Sucesso', 'Login realizado com sucesso.');
 
-                        <button class="btn outline" onclick="editDemo(${animal.id})">
-                            Editar
-                        </button>
-                    </div>
-                </div>
-            </article>
-        `;
-    });
-
-    for (let i = 1; i <= totalPaginas; i++) {
-        pagination.innerHTML += `
-            <button class="${i === paginaAtual ? 'active' : ''}" onclick="mudarPagina(${i})">
-                ${i}
-            </button>
-        `;
+    } catch (error) {
+        console.error(error);
+        showMessage('Erro', 'Não foi possível fazer login. Tente novamente.');
     }
 }
 
-/*================
-PAGINAÇÃO
-=================*/
-function mudarPagina(pagina) {
-    paginaAtual = pagina;
-    renderCards();
+function fillUserData() {
+    if (!loggedUser) return;
+
+    document.getElementById('nomePessoa').value = loggedUser.nome || '';
+    document.getElementById('telefonePessoa').value = loggedUser.telefone || '';
+
+    const statusText = document.getElementById('userStatusText');
+    const loginBtn = document.querySelector('.login-toggle-btn');
+
+    if (statusText) {
+        statusText.textContent = `Logado como ${loggedUser.nome}`;
+    }
+
+    if (loginBtn) {
+        loginBtn.style.display = 'none';
+    }
 }
 
-/*================
-TIPO DE CADASTRO
-=================*/
-function formatTipoCadastro(tipo) {
-    const tipos = {
-        encontrador: 'Pessoa que encontrou',
-        dono: 'Dono procurando'
-    };
-
-    return tipos[tipo] || 'Não informado';
+function checkLoggedUser() {
+    if (loggedUser) {
+        fillUserData();
+    }
 }
 
-/*================
-DETALHES DO ANIMAL
-=================*/
-function details(id) {
-    const animal = animals.find(item => item.id === id);
 
-    document.getElementById('modalContent').innerHTML = `
-        <img class="detail-img" src="${animal.foto}">
+/*==========================
+  MODAL DE PERFIL DO USUÁRIO
+============================*/
+function openProfileModal() {
+  document.getElementById('accountDropdown').classList.remove('open');
 
-        <div class="detail-body">
-            <span class="badge ${animal.status === 'encontrado' ? 'found' : 'lost'}" style="position:static">
-                ${animal.status}
-            </span>
+  if (!loggedUser) {
+    showMessage('Atenção', 'Você precisa fazer login para acessar o perfil.');
+    openLoginModal();
+    return;
+  }
 
-            <h2 style="margin-top:14px;font-size:30px">${animal.nomeAnimal}</h2>
+  document.getElementById('profileNome').textContent = loggedUser.nome || '-';
+  document.getElementById('profileTelefone').textContent = loggedUser.telefone || '-';
+  document.getElementById('profileUsuario').textContent = loggedUser.usuario || '-';
 
-            <p style="color:var(--muted);margin-top:6px">
-                ${animal.raca} • ${animal.cor} • ${animal.porte}
-            </p>
+  document.getElementById('profileModal').classList.add('open');
+}
 
-            <div class="detail-grid">
-                <div class="detail-item"><span>Sexo</span><strong>${animal.sexo}</strong></div>
-                <div class="detail-item"><span>Data</span><strong>${formatDate(animal.dataEncontrado)}</strong></div>
-                <div class="detail-item"><span>Bairro</span><strong>${animal.bairro}</strong></div>
-                <div class="detail-item"><span>Cidade</span><strong>${animal.cidade}</strong></div>
-                <div class="detail-item" style="grid-column:1/-1"><span>Local</span><strong>${animal.local}</strong></div>
-                <div class="detail-item" style="grid-column:1/-1"><span>Observações</span><strong>${animal.obs}</strong></div>
-                <div class="detail-item"><span>Responsável</span><strong>${animal.nomePessoa}</strong></div>
-                <div class="detail-item"><span>WhatsApp</span><strong>${animal.telefone || 'Não informado'}</strong></div>
-            </div>
+function closeProfileModal() {
+  document.getElementById('profileModal').classList.remove('open');
+}
 
-            <a class="btn wa full"
-               target="_blank"
-               href="https://wa.me/55${onlyNumbers(animal.telefone)}?text=Olá, vi o cadastro do cachorro ${encodeURIComponent(animal.nomeAnimal)} no sistema Encontre Meu Amigo.">
-               Chamar no WhatsApp
-            </a>
+
+/*=======================================
+ MODAL DE ANIMAIS CADASTRADOS DO USUÁRIO
+=========================================*/
+async function openMyAnimalsModal() {
+  document.getElementById('accountDropdown').classList.remove('open');
+
+  if (!loggedUser) {
+    showMessage('Atenção', 'Você precisa fazer login para ver seus animais cadastrados.');
+    openLoginModal();
+    return;
+  }
+
+  const list = document.getElementById('myAnimalsList');
+  list.innerHTML = 'Carregando...';
+
+  document.getElementById('myAnimalsModal').classList.add('open');
+
+  try {
+    const snapshot = await db.collection('sitepet_animais')
+      .where('usuarioId', '==', loggedUser.id)
+      .get();
+
+    if (snapshot.empty) {
+      list.innerHTML = '<p>Você ainda não cadastrou nenhum animal.</p>';
+      return;
+    }
+
+    list.innerHTML = snapshot.docs.map(doc => {
+      const animal = doc.data();
+
+      return `
+        <div class="my-animal-item">
+          <strong>${animal.nomeAnimal || 'Sem nome'}</strong>
+          <span>Situação: ${animal.tipoCadastro || '-'}</span>
+          <span>Raça: ${animal.racaAnimal || '-'}</span>
+          <span>Cor: ${animal.corAnimal || '-'}</span>
+          <span>Bairro: ${animal.bairroAnimal || '-'}</span>
+          <span>Cidade: ${animal.cidadeAnimal || '-'}</span>
         </div>
-    `;
+      `;
+    }).join('');
 
-    document.getElementById('modal').classList.add('active');
+  } catch (error) {
+    console.error(error);
+    list.innerHTML = '<p>Erro ao carregar seus animais cadastrados.</p>';
+  }
 }
 
-function closeModal() {
-    document.getElementById('modal').classList.remove('active');
+function closeMyAnimalsModal() {
+  document.getElementById('myAnimalsModal').classList.remove('open');
 }
 
-function editDemo(id) {
-    mostrarMensagemModal(
-        'Função em desenvolvimento',
-        'Na versão com Firebase este botão permitirá editar o cadastro completo.',
-        'info'
-    );
-}
+/*==========================
+  SALVAR ANIMAL NO FIREBASE
+============================*/
+const animalForm = document.getElementById('animalForm');
 
-/*================
-CONTADOR HOME
-=================*/
-function updateTotal() {
-    document.getElementById('totalHome').textContent = animals.length;
-}
+if (animalForm) {
+    animalForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
 
-/*================
-FILTROS
-=================*/
-document.addEventListener('input', e => {
-    if (['search', 'porteFilter'].includes(e.target.id)) {
-        renderCards();
-    }
-});
+        const novoAnimal = {
+            nomePessoa: document.getElementById('nomePessoa').value,
+            telefonePessoa: document.getElementById('telefonePessoa').value,
+            tipoCadastro: document.getElementById('tipoCadastro').value,
+            nomeAnimal: document.getElementById('nomeAnimal').value || 'Sem nome',
+            categoriaAnimal: document.getElementById('categoriaAnimal').value,
+            racaAnimal: document.getElementById('racaAnimal').value || 'Não informada',
+            corAnimal: document.getElementById('corAnimal').value,
+            bairroAnimal: document.getElementById('bairroAnimal').value,
+            cidadeAnimal: document.getElementById('cidadeAnimal').value,
+            descricaoAnimal: document.getElementById('descricaoAnimal').value,
+            foto: '',
+            usuarioId: loggedUser ? loggedUser.id : '',
+            usuarioNome: loggedUser ? loggedUser.nome : '',
+            criadoEm: new Date()
+        };
 
-/*================
-MODAL DE MENSAGEM
-=================*/
-function mostrarMensagemModal(titulo, texto, tipo = 'success') {
-    const modal = document.getElementById('customModal');
-    const icon = document.getElementById('customModalIcon');
+        try {
+            await db.collection('sitepet_animais').add(novoAnimal);
 
-    document.getElementById('customModalTitle').textContent = titulo;
-    document.getElementById('customModalText').textContent = texto;
+            showMessage('Anúncio', ' publicado com sucesso!');
+            animalForm.reset();
+            closeAnimalModal();
 
-    if (tipo === 'success') {
-        icon.textContent = '✓';
-        icon.style.background = '#e8f8ee';
-        icon.style.color = '#2b7a4b';
-    }
-
-    if (tipo === 'warning') {
-        icon.textContent = '!';
-        icon.style.background = '#fff4dc';
-        icon.style.color = '#d89000';
-    }
-
-    if (tipo === 'info') {
-        icon.textContent = 'i';
-        icon.style.background = '#e8f1ff';
-        icon.style.color = '#2563eb';
-    }
-
-    modal.classList.add('active');
-}
-
-function fecharMensagemModal() {
-    document.getElementById('customModal').classList.remove('active');
-}
-
-/*================
-MODAL PIX
-=================*/
-function abrirModalPix() {
-    document.getElementById('pixModal').classList.add('active');
-}
-
-function fecharModalPix() {
-    document.getElementById('pixModal').classList.remove('active');
-}
-
-/*================
-AVALIAÇÃO
-=================*/
-function setRating(valor) {
-    avaliacaoSelecionada = valor;
-
-    const estrelas = document.querySelectorAll('#starRating span');
-
-    estrelas.forEach((estrela, index) => {
-        estrela.classList.toggle('active', index < valor);
+        } catch (error) {
+            console.error(error);
+            showMessage('Erro', ' ao publicar anúncio. Tente novamente.');
+        }
     });
-
-    const textos = {
-        1: '😕 Pode melhorar',
-        2: '🙂 Interessante',
-        3: '😊 Boa ideia',
-        4: '😍 Excelente projeto',
-        5: '🚀 Projeto incrível!'
-    };
-
-    document.getElementById('ratingText').textContent = textos[valor];
 }
 
-/*================
-COMENTÁRIOS PIX
-=================*/
-function salvarComentarioPix() {
-    const comentario = document.getElementById('comentarioPix').value.trim();
-    const lista = document.getElementById('listaComentarios');
-
-    if (!comentario) {
-        mostrarMensagemModal(
-        'Comentário vazio',
-        'Digite um comentário antes de salvar.',
-        'warning'
-    );
-        return;
+/*==================================
+ATUALIZAÇÃO DOS CARDS APÓS CADASTRO
+=====================================*/
+function refreshCardsIfNeeded(page) {
+    if (page === 'home') {
+        buildCards('all');
     }
 
-    const vazio = lista.querySelector('.empty-comment');
-
-    if (vazio) {
-        vazio.remove();
+    if (page === 'lost') {
+        buildCards('lost');
     }
 
-    const item = document.createElement('div');
-    const estrelasTexto = '⭐'.repeat(avaliacaoSelecionada || 0);
-
-    item.className = 'comment-item';
-
-    item.innerHTML = `
-        <strong>Apoiador:</strong> ${estrelasTexto}<br>
-        ${comentario}
-    `;
-
-    lista.prepend(item);
-
-    document.getElementById('comentarioPix').value = '';
-    fecharModalPix();
+    if (page === 'found') {
+        buildCards('found');
+    }
 }
+
+/*==========================
+  TOGGLE VISUALIZAÇÃO SENHA
+=============================*/
+function togglePassword(inputId, button) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        button.textContent = "🙈";
+    } else {
+        input.type = "password";
+        button.textContent = "👁️";
+    }
+}
+
+/*===================
+    MENSAGENS GERAIS
+=====================*/
+function showMessage(title, text) {
+    document.getElementById('messageTitle').textContent = title;
+    document.getElementById('messageText').textContent = text;
+    document.getElementById('messageModal').classList.add('open');
+}
+
+function closeMessageModal() {
+    document.getElementById('messageModal').classList.remove('open');
+}
+
+function toggleMobileMenu() {
+  document.querySelector('.nav-links')?.classList.toggle('open');
+}
+
+/*===================
+EVENTOS DOS FILTROS
+=====================*/
+document.getElementById('searchText')?.addEventListener('input', renderFilteredCards);
+document.getElementById('filterBairro')?.addEventListener('input', renderFilteredCards);
+document.getElementById('filterTipo')?.addEventListener('change', renderFilteredCards);
+document.getElementById('filterCategoria')?.addEventListener('change', renderFilteredCards);
+
 
 /*================
 INICIALIZAÇÃO
 =================*/
-renderCards();
-updateTotal();
-atualizarFormularioPorTipo();
+updateHeaderAccountUI();
+buildCards('all');
