@@ -64,6 +64,7 @@ img, video {
   .btn-announce, .header-login-btn { font-size: 13px; padding: 9px 16px; }
   .hero-text h1 { font-size: 36px; }
   .hero-card    { max-width: 210px; padding: 20px 16px; }
+  .hero-cards-col { gap: 10px; }
   .search-bar   { max-width: 900px; }
   .how-it-works-section, .section { max-width: 1100px; }
 }
@@ -88,6 +89,7 @@ img, video {
   .hero-text h1 { font-size: 34px; }
   .hero-text p  { font-size: 14px; max-width: 360px; }
   .hero-card    { max-width: 200px; }
+  .hero-cards-col { gap: 8px; }
 
   .search-bar { width: calc(100% - 32px); margin-top: -36px; padding: 18px 20px; gap: 14px; }
 
@@ -124,6 +126,10 @@ img, video {
     order: 2;
     margin-left: 0;
     gap: 8px;
+  }
+
+  .nav-status-card {
+    display: none;
   }
 
   /* Hambúrguer: depois dos botões */

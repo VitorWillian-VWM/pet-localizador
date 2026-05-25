@@ -2,6 +2,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyAcR5PoqRjq8quENy6rrmDTdf6h5H3u5hA",
   authDomain: "fe-tec-agenda.firebaseapp.com",
+  databaseURL: "https://fe-tec-agenda-default-rtdb.firebaseio.com",
   projectId: "fe-tec-agenda",
   storageBucket: "fe-tec-agenda.firebasestorage.app",
   messagingSenderId: "229857022065",
@@ -16,3 +17,6 @@ const db = firebase.firestore();
 
 // Auth
 const auth = firebase.auth();
+
+// Realtime Database
+const rtdb = firebase.database();

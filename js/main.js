@@ -671,3 +671,36 @@ INICIALIZAÇÃO
 =================*/
 updateHeaderAccountUI();
 buildCards('all');
+
+/*================
+USUÁRIOS ONLINE - FIREBASE REALTIME DATABASE
+=================*/
+(function initOnlineStatus() {
+  const countEl = document.getElementById('onlineCount');
+  if (!countEl) return;
+
+  // Gera um ID único para esta sessão
+  const sessionId = Math.random().toString(36).slice(2);
+
+  const presencaRef = rtdb.ref('presenca');
+  const minhaPresenca = presencaRef.child(sessionId);
+
+  // Detecta conexão com o Firebase
+  rtdb.ref('.info/connected').on('value', function (snap) {
+    if (!snap.val()) return;
+
+    // Quando desconectar (fechar aba, perder internet), remove automaticamente
+    minhaPresenca.onDisconnect().remove();
+
+    // Registra presença
+    minhaPresenca.set({
+      entrou: firebase.database.ServerValue.TIMESTAMP
+    });
+  });
+
+  // Escuta em tempo real quantos usuários estão online
+  presencaRef.on('value', function (snap) {
+    const total = snap.numChildren();
+    countEl.textContent = total;
+  });
+})();
